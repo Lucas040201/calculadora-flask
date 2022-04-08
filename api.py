@@ -5,6 +5,10 @@ import os
 from flask import Flask, jsonify, request, render_template
 from math import sqrt
 
+"""
+    Verificado pelo professor em aula
+"""
+
 app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
@@ -16,15 +20,18 @@ def resultado():
     numero1 = int(request.form['numero1'])
     numero2 = int(request.form['numero1'])
     conta = request.form['conta']
-    contas = {
-        'soma' : lambda x, y: x + y,
-        'sub' : lambda x, y: x - y,
-        'mult' : lambda x, y: x * y,
-        'div' : lambda x, y: x / y
-    }
+    try:
+        contas = {
+            'soma' : lambda x, y: x + y,
+            'sub' : lambda x, y: x - y,
+            'mult' : lambda x, y: x * y,
+            'div' : lambda x, y: x / y
+        }
 
-    resultado = contas[conta](numero1, numero2)
-    return render_template('resultado.html', resultado=resultado)
+        resultado = contas[conta](numero1, numero2)
+        return render_template('resultado.html', resultado=resultado)
+    except:
+        return render_template('resultado.html', message="Erro na operação")
 
 
 if __name__ == "__main__":

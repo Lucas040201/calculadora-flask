@@ -1,1 +1,5 @@
-<h3>Resultado da contao: {{resultado}}</h3>
+{% if not message %}
+    <h3>Resultado da contao: {{resultado}}</h3>
+{% else %}
+    <h3>{{ message }}</h3>
+{% endif %}
